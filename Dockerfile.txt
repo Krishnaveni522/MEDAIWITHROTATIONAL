@@ -1,0 +1,29 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    tesseract-ocr \
+    tesseract-ocr-eng \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy project
+COPY . .
+
+# Install python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Ensure pytesseract finds tesseract
+ENV TESSERACT_CMD=/usr/bin/tesseract
+
+EXPOSE 5000
+
+CMD ["python", "src/app.py"]
