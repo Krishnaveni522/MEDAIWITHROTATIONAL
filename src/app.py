@@ -12,7 +12,8 @@ from difflib import SequenceMatcher
 import re
 import os
 
-app = Flask(__name__)
+#app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 app.secret_key = 'medai-secret-key-2025-change-in-production'
 
 # Initialize database on startup
