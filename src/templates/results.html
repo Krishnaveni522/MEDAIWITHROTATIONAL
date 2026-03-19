@@ -1,313 +1,176 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Instructions - Results</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px 0;
-        }
-        .results-container {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 20px auto;
-            max-width: 1000px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .results-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .results-header h1 {
-            color: #667eea;
-            font-weight: bold;
-        }
-        .home-link {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            z-index: 1000;
-        }
-        .home-link:hover {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-        }
-        .back-link {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            z-index: 1000;
-        }
-        .back-link:hover {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-        }
-        .ocr-section {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
-        }
-        .ocr-title {
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .ocr-text {
-            background: white;
-            padding: 15px;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .results-section {
-            margin-top: 30px;
-        }
-        .medicine-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border-left: 5px solid #28a745;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .medicine-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        .medicine-name {
-            color: #667eea;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .matched-variant {
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-        .match-score {
-            display: inline-block;
-            background: #28a745;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .instructions-text {
-            color: #333;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            background: #fff3cd;
-            border-radius: 10px;
-            border: 2px dashed #ffc107;
-        }
-        .no-results i {
-            font-size: 3rem;
-            color: #ffc107;
-            margin-bottom: 15px;
-        }
-        .try-again-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 12px 40px;
-            border-radius: 25px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-        .try-again-btn:hover {
-            transform: scale(1.05);
-            color: white;
-            text-decoration: none;
-        }
-        .toggle-ocr {
-            cursor: pointer;
-            color: #667eea;
-            text-decoration: underline;
-            font-size: 0.9rem;
-        }
-        .toggle-ocr:hover {
-            color: #764ba2;
-        }
-        .success-icon {
-            color: #28a745;
-            margin-right: 10px;
-        }
-    </style>
+
+```
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    .results-container {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 20px auto;
+        max-width: 1000px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .results-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .results-header h1 {
+        color: #667eea;
+        font-weight: bold;
+    }
+
+    .medicine-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        border-left: 5px solid #28a745;
+    }
+
+    .medicine-name {
+        color: #667eea;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .match-score {
+        background: #28a745;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .instructions-text {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 40px;
+        background: #fff3cd;
+        border-radius: 10px;
+        border: 2px dashed #ffc107;
+    }
+
+    .try-again-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        padding: 12px 40px;
+        border-radius: 25px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+    }
+</style>
+```
+
 </head>
+
 <body>
-    <a href="/" class="home-link" title="Home">
-        <i class="fas fa-home"></i>
-    </a>
-    <a href="/patient" class="back-link" title="Back to Patient Page">
-        <i class="fas fa-arrow-left"></i>
-    </a>
 
-    <div class="results-container">
-        <div class="results-header">
-            <h1><i class="fas fa-search-plus"></i> Medicine Search Results</h1>
-            <p class="text-muted">
-                {% if search_mode == 'text' %}
-                Based on your text search
-                {% else %}
-                Based on your uploaded image
-                {% endif %}
-            </p>
-        </div>
+<div class="results-container">
 
-        <!-- Search/OCR Text Section -->
-        <div class="ocr-section">
-            <div class="ocr-title">
-                {% if search_mode == 'text' %}
-                <i class="fas fa-keyboard"></i> Search Query
-                {% else %}
-                <i class="fas fa-file-alt"></i> Extracted Text from Image
-                {% endif %}
-                <span class="toggle-ocr" onclick="toggleOCR()">
-                    <small id="toggle-text">(click to hide)</small>
-                </span>
+```
+<!-- Header -->
+<div class="results-header">
+    <h1><i class="fas fa-search-plus"></i> Medicine Search Results</h1>
+</div>
+
+<!-- Results -->
+<div class="results-section">
+
+    {% if instructions and instructions|length > 0 %}
+
+        {% for drug_name, matched_variant, instruction_snippet, score in instructions %}
+
+        <div class="medicine-card">
+
+            <!-- Medicine Name -->
+            <div class="medicine-name">
+                <i class="fas fa-pills"></i> {{ drug_name }}
             </div>
-            <div class="ocr-text" id="ocr-content">
-                {% if search_mode == 'text' %}
-                    <strong>You searched for:</strong> {{ ocr_text }}
-                {% else %}
-                    {{ ocr_text if ocr_text else "No text could be extracted from the image." }}
-                {% endif %}
+
+            <!-- ✅ IMAGE (FIXED) -->
+            <div class="text-center mb-3">
+                <img 
+                    src="{{ url_for('static', filename='drug_images/' + drug_name.replace(' ', '_') + '_0.png') }}"
+                    alt="{{ drug_name }}"
+                    style="max-width:200px; border-radius:10px;"
+                    onerror="this.src='https://via.placeholder.com/200x150?text=No+Image';"
+                >
             </div>
+
+            <!-- Match Score -->
+            <div class="match-score">
+                Confidence: {{ (score * 100)|round(1) }}%
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions-text">
+                {{ instruction_snippet|safe if instruction_snippet else "No instructions available." }}
+            </div>
+
         </div>
 
-        <!-- Results Section -->
-        <div class="results-section">
-            {% if instructions and instructions|length > 0 %}
-                <h3 class="mb-4">
-                    <i class="fas fa-check-circle success-icon"></i>
-                    Found {{ instructions|length }} Matching Medicine{{ 's' if instructions|length > 1 else '' }}
-                </h3>
+        {% endfor %}
 
-                {% for drug_name, matched_variant, instruction_snippet, score in instructions %}
-                <div class="medicine-card">
-                    <div class="medicine-name">
-                        <i class="fas fa-pills"></i> {{ drug_name }}
-                    </div>
-                    
-                    {% if matched_variant and matched_variant.lower() != drug_name.lower() %}
-                    <div class="matched-variant">
-                        <i class="fas fa-search"></i> Matched as: "{{ matched_variant }}"
-                    </div>
-                    {% endif %}
-                    
-                    <div class="match-score">
-                        <i class="fas fa-chart-line"></i> Confidence: {{ (score * 100)|round(1) }}%
-                    </div>
-                    
-                    <div class="instructions-text">
-                        <strong><i class="fas fa-info-circle"></i> Instructions:</strong><br>
-                        {{ instruction_snippet|safe if instruction_snippet else "No detailed instructions available." }}
-                    </div>
-                </div>
-                {% endfor %}
-
-                <div class="text-center mt-4">
-                    <a href="/patient" class="try-again-btn">
-                        {% if search_mode == 'text' %}
-                        <i class="fas fa-redo"></i> Search Again
-                        {% else %}
-                        <i class="fas fa-redo"></i> Upload Another Image
-                        {% endif %}
-                    </a>
-                </div>
-
-            {% else %}
-                <div class="no-results">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>No Matching Medicines Found</h3>
-                    {% if search_mode == 'text' %}
-                    <p class="text-muted">
-                        We couldn't find any medicines in our database that match "{{ ocr_text }}".
-                    </p>
-                    <p class="text-muted">
-                        <strong>Suggestions:</strong><br>
-                        • Try searching with different keywords<br>
-                        • Check spelling of the medicine name<br>
-                        • Try using generic or brand name<br>
-                        • The medicine might not be in our database yet
-                    </p>
-                    <a href="/patient" class="try-again-btn">
-                        <i class="fas fa-search"></i> Search Again
-                    </a>
-                    {% else %}
-                    <p class="text-muted">
-                        We couldn't find any medicines in our database that match the text extracted from your image.
-                    </p>
-                    <p class="text-muted">
-                        <strong>Suggestions:</strong><br>
-                        • Make sure the medicine label is clearly visible<br>
-                        • Try taking a photo in better lighting<br>
-                        • Ensure the image is not blurry<br>
-                        • The medicine might not be in our database yet
-                    </p>
-                    <a href="/patient" class="try-again-btn">
-                        <i class="fas fa-camera"></i> Try Again
-                    </a>
-                    {% endif %}
-                </div>
-            {% endif %}
+        <div class="text-center">
+            <a href="/patient" class="try-again-btn">
+                <i class="fas fa-redo"></i> Try Again
+            </a>
         </div>
 
-        <!-- Warning Notice -->
-        <div class="alert alert-warning mt-4" role="alert">
-            <i class="fas fa-exclamation-circle"></i>
-            <strong>Important:</strong> This information is for reference only. Always consult with a healthcare professional before taking any medication.
-        </div>
-    </div>
+    {% else %}
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function toggleOCR() {
-            const content = document.getElementById('ocr-content');
-            const toggleText = document.getElementById('toggle-text');
-            
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                toggleText.textContent = '(click to hide)';
-            } else {
-                content.style.display = 'none';
-                toggleText.textContent = '(click to show)';
-            }
-        }
-    </script>
+        <div class="no-results">
+            <i class="fas fa-exclamation-triangle fa-3x text-warning"></i>
+            <h3>No Matching Medicines Found</h3>
+            <p>Try again with a different image or search.</p>
+
+            <a href="/patient" class="try-again-btn">
+                Try Again
+            </a>
+        </div>
+
+    {% endif %}
+
+</div>
+
+<!-- Warning -->
+<div class="alert alert-warning mt-4">
+    <strong>Important:</strong> Always consult a doctor before using any medication.
+</div>
+```
+
+</div>
+
 </body>
 </html>
+
